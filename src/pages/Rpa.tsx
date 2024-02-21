@@ -79,12 +79,34 @@ function RPA() {
       .then((response) => {
         alert(`File Uploaded`);
         console.log(response);
+
+        batchProcessRequest(response.data);
+
       })
       .catch((error) => {
         alert(`Upload Failed`);
         console.error(error);
       });
   };
+
+  const batchProcessRequest = (batchId:number) => { axios
+  .post(
+    `${import.meta.env.VITE_DAYA_AUTOMATION_API_URL}/PatientVisit/BatchProcess/${batchId}`, null,
+    {
+      headers: {
+        "X-Api-Key":
+          "oPBkPFNkgNuAtobw0CVWaZ8ARxb9munj",
+      },
+    }
+  )
+  .then((response) => {
+    console.log(`Intializing batch process`);
+    console.log(response);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+};
 
   // const handleFileUpload = (event: any) => {
   //   if (!event || !event.target || !event.target.files) {
